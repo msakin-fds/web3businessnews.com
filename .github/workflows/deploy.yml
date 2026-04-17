@@ -14,6 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Test SSH connection
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            echo "SSH OK — server: $(hostname)"
+            echo "WP path check: $(ls ${{ secrets.WP_PATH }}/wp-config.php 2>&1)"
+            echo "wp-content writable: $(test -w ${{ secrets.WP_PATH }}/wp-content && echo YES || echo NO)"
+
       - name: Remove placeholder files before deploy
         run: find wp-content -name '.gitkeep' -delete
 
@@ -27,7 +39,7 @@ jobs:
           source: "wp-content"
           target: ${{ secrets.WP_PATH }}
 
-      - name: Clear WordPress cache
+      - name: Verify deployment + clear cache
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -35,9 +47,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASSWORD }}
           script: |
-            cd ${{ secrets.WP_PATH }}
+            echo "Plugin deployed: $(ls ${{ secrets.WP_PATH }}/wp-content/plugins/web3bn-eeat/web3bn-eeat.php 2>&1)"
             if command -v wp &> /dev/null; then
-              wp cache flush --allow-root
-              wp rewrite flush --allow-root
+              wp cache flush --allow-root --path=${{ secrets.WP_PATH }}
             fi
-            echo "Deploy completed at $(date)"
+            echo "Done at $(date)"
