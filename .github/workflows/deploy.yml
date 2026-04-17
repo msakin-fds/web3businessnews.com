@@ -14,16 +14,18 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Sync wp-content to server
-        uses: burnett01/rsync-deployments@7.0.1
+      - name: Remove placeholder files before deploy
+        run: find wp-content -name '.gitkeep' -delete
+
+      - name: Deploy wp-content via SCP
+        uses: appleboy/scp-action@v0.1.7
         with:
-          switches: -avzr --exclude='.git*' --exclude='.DS_Store' --exclude='*.log' --exclude='.gitkeep'
-          path: wp-content/
-          remote_path: ${{ secrets.WP_PATH }}/wp-content/
-          remote_host: ${{ secrets.SSH_HOST }}
-          remote_port: ${{ secrets.SSH_PORT }}
-          remote_user: ${{ secrets.SSH_USER }}
-          remote_password: ${{ secrets.SSH_PASSWORD }}
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          source: "wp-content"
+          target: ${{ secrets.WP_PATH }}
 
       - name: Clear WordPress cache
         uses: appleboy/ssh-action@v1.0.3
