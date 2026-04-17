@@ -1,0 +1,205 @@
+/* Web3BusinessNews — Author Bio Box v1.0.0 */
+
+.w3bn-author-box {
+	clear: both;
+	margin: 2.5rem 0 0;
+	padding: 1.5rem 1.75rem;
+	background: #f7f9fc;
+	border: 1px solid #e1e8f0;
+	border-left: 4px solid #1a56db;
+	border-radius: 6px;
+	font-size: 0.9rem;
+	line-height: 1.5;
+}
+
+.w3bn-author-box__inner {
+	display: flex;
+	gap: 1.25rem;
+	align-items: flex-start;
+}
+
+/* ── Avatar ─────────────────────────────────────────────────────────── */
+
+.w3bn-author-box__avatar {
+	flex-shrink: 0;
+}
+
+.w3bn-author-box__avatar img {
+	display: block;
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	object-fit: cover;
+	background: #d1d5db;
+}
+
+/* ── Content ─────────────────────────────────────────────────────────── */
+
+.w3bn-author-box__content {
+	flex: 1;
+	min-width: 0;
+}
+
+.w3bn-author-box__header {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 0.75rem;
+	margin-bottom: 0.75rem;
+	flex-wrap: wrap;
+}
+
+/* ── Author meta (name / title / location) ───────────────────────────── */
+
+.w3bn-author-box__meta {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.w3bn-author-box__name {
+	font-size: 1rem;
+	font-weight: 700;
+	color: #111827;
+	text-decoration: none;
+	line-height: 1.3;
+}
+
+.w3bn-author-box__name:hover,
+.w3bn-author-box__name:focus {
+	color: #1a56db;
+}
+
+.w3bn-author-box__title {
+	display: block;
+	font-size: 0.72rem;
+	font-weight: 700;
+	color: #1a56db;
+	text-transform: uppercase;
+	letter-spacing: 0.07em;
+}
+
+.w3bn-author-box__location {
+	display: inline-flex;
+	align-items: center;
+	gap: 3px;
+	font-size: 0.75rem;
+	color: #6b7280;
+	margin-top: 1px;
+}
+
+/* ── Social links ────────────────────────────────────────────────────── */
+
+.w3bn-author-box__social {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	flex-shrink: 0;
+	flex-wrap: wrap;
+}
+
+.w3bn-author-box__social-link {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	border-radius: 4px;
+	color: #fff;
+	text-decoration: none;
+	transition: opacity 0.15s ease;
+}
+
+.w3bn-author-box__social-link:hover,
+.w3bn-author-box__social-link:focus {
+	opacity: 0.8;
+	color: #fff;
+}
+
+.w3bn-author-box__social-link--x {
+	background: #000;
+}
+
+.w3bn-author-box__social-link--linkedin {
+	background: #0077b5;
+}
+
+.w3bn-author-box__articles {
+	display: inline-flex;
+	align-items: center;
+	font-size: 0.75rem;
+	color: #6b7280;
+	text-decoration: none;
+	padding: 4px 9px;
+	border: 1px solid #d1d5db;
+	border-radius: 4px;
+	white-space: nowrap;
+	line-height: 1;
+	transition: border-color 0.15s, color 0.15s;
+}
+
+.w3bn-author-box__articles:hover,
+.w3bn-author-box__articles:focus {
+	border-color: #1a56db;
+	color: #1a56db;
+}
+
+/* ── Bio text ────────────────────────────────────────────────────────── */
+
+.w3bn-author-box__bio {
+	font-size: 0.875rem;
+	line-height: 1.75;
+	color: #374151;
+	margin: 0 0 0.875rem;
+}
+
+/* ── Expertise tags ──────────────────────────────────────────────────── */
+
+.w3bn-author-box__tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.35rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.w3bn-author-box__tag {
+	font-size: 0.68rem;
+	font-weight: 700;
+	padding: 3px 7px;
+	background: #dbeafe;
+	color: #1e40af;
+	border-radius: 3px;
+	text-transform: uppercase;
+	letter-spacing: 0.05em;
+	white-space: nowrap;
+}
+
+/* ── Responsive ──────────────────────────────────────────────────────── */
+
+@media (max-width: 580px) {
+	.w3bn-author-box {
+		padding: 1.25rem;
+	}
+
+	.w3bn-author-box__inner {
+		flex-direction: column;
+		align-items: center;
+		text-align: center;
+	}
+
+	.w3bn-author-box__header {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.w3bn-author-box__social {
+		justify-content: center;
+	}
+
+	.w3bn-author-box__tags {
+		justify-content: center;
+	}
+}
