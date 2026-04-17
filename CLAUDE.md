@@ -24,11 +24,41 @@ wp-content/
     deploy.yml ← auto-deploys to SiteGround on push to main
 ```
 
+## Theme & Page Builder
+
+- **Active theme:** Hello Elementor v3.4.7 — a minimal Elementor-optimised base theme
+- **Template kit:** NeoNews (ElementsKit) — provides the news site layout and design
+- **Page builder:** Elementor v4.0.1 + Elementor Pro v3.35.1
+- Design changes (layouts, widgets, styling) are made in the Elementor visual editor, not directly in PHP/CSS files
+- Custom CSS or PHP overrides go in a child theme under `wp-content/themes/`
+
+## Active Plugins
+
+| Plugin | Version | Purpose |
+|--------|---------|--------|
+| Elementor | 4.0.1 | Page builder core |
+| Elementor Pro | 3.35.1 | Theme builder, popups, forms, pro widgets |
+| Element Pack Pro | 9.1.0 | Additional Elementor widgets (BdThemes) — currently inactive |
+| ElementsKit Lite | 3.9.0 | Elementor addons + NeoNews template kit |
+| MetForm | 4.1.3 | Form builder for Elementor |
+| PopupKit | 2.2.4 | Popup builder (Wpmet) |
+| Yoast SEO | 27.3 | SEO, XML sitemaps |
+| Yoast Duplicate Post | 4.6 | Clone posts/pages |
+| Skyboot Custom Icons for Elementor | 1.1.0 | 14,300+ icon library |
+| Envato Market | 2.0.13 | Theme/plugin updates from Envato |
+| Template Kit Import | 1.0.16 | Import Envato template kits |
+| Security Optimizer | 1.6.0 | SiteGround security hardening |
+| Speed Optimizer | 7.7.8 | SiteGround performance/caching |
+| SiteGround Central | 3.4.1 | SiteGround hosting management |
+| Site Kit by Google | 1.176.0 | Google Analytics/Search Console integration |
+| Quick Featured Images | 13.7.5 | Bulk featured image management — currently inactive |
+| WordPress Importer | 0.9.5 | Import WXR files |
+
 ## Deployment
 
 Every push to `main` that changes files under `wp-content/` automatically deploys to the live server via GitHub Actions (rsync over SSH).
 
-**Required GitHub Secrets** (set at github.com → repo → Settings → Secrets → Actions):
+**Required GitHub Secrets** (github.com → repo → Settings → Secrets → Actions):
 
 | Secret | Value |
 |--------|-------|
@@ -44,13 +74,14 @@ Use the Application Password for content updates (posts, pages, etc.):
 
 - **Auth:** HTTP Basic — username `fdsthinker@fds.com` + application password from `.env`
 - **Base URL:** `https://web3businessnews.com/wp-json/wp/v2/`
-- **Note:** Cloudflare may block automated requests — add a bypass rule for `/wp-json/*` if needed
+- **Note:** Cloudflare blocks automated requests — add a bypass rule for `/wp-json/*` to enable API access
 
 ## Database
 
 - **Host:** `127.0.0.1` (server-local only, not externally accessible)
-- **Charset:** `utf8mb4`
-- Credentials stored in `.env` (see `.env.example`)
+- **Name:** `dbfrqtzx0hsm0r`
+- **Charset:** `utf8`
+- Full credentials in `.env` (see `.env.example`)
 
 ## Development Branch
 
