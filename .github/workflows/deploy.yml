@@ -1,0 +1,41 @@
+name: Deploy to SiteGround
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'wp-content/**'
+      - '.github/workflows/deploy.yml'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Sync wp-content to server
+        uses: burnett01/rsync-deployments@7.0.1
+        with:
+          switches: -avzr --delete --exclude='.git*' --exclude='.DS_Store' --exclude='*.log'
+          path: wp-content/
+          remote_path: ${{ secrets.WP_PATH }}/wp-content/
+          remote_host: ${{ secrets.SSH_HOST }}
+          remote_port: ${{ secrets.SSH_PORT }}
+          remote_user: ${{ secrets.SSH_USER }}
+          remote_password: ${{ secrets.SSH_PASSWORD }}
+
+      - name: Clear WordPress cache
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          port: ${{ secrets.SSH_PORT }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASSWORD }}
+          script: |
+            cd ${{ secrets.WP_PATH }}
+            if command -v wp &> /dev/null; then
+              wp cache flush --allow-root
+              wp rewrite flush --allow-root
+            fi
+            echo "Deploy completed at $(date)"
