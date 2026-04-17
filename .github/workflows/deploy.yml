@@ -20,7 +20,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             echo "SSH OK — server: $(hostname)"
             echo "WP path check: $(ls ${{ secrets.WP_PATH }}/wp-config.php 2>&1)"
@@ -35,7 +35,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "wp-content"
           target: ${{ secrets.WP_PATH }}
 
@@ -45,10 +45,10 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           port: ${{ secrets.SSH_PORT }}
           username: ${{ secrets.SSH_USER }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            echo "Plugin deployed: $(ls ${{ secrets.WP_PATH }}/wp-content/plugins/web3bn-eeat/web3bn-eeat.php 2>&1)"
+            echo "Plugin check: $(ls ${{ secrets.WP_PATH }}/wp-content/plugins/web3bn-eeat/web3bn-eeat.php 2>&1)"
             if command -v wp &> /dev/null; then
               wp cache flush --allow-root --path=${{ secrets.WP_PATH }}
             fi
-            echo "Done at $(date)"
+            echo "Deploy complete at $(date)"
