@@ -35,7 +35,7 @@ wp-content/
 ## Active Plugins
 
 | Plugin | Version | Purpose |
-|--------|---------|--------|
+|--------|---------|---------|
 | Elementor | 4.0.1 | Page builder core |
 | Elementor Pro | 3.35.1 | Theme builder, popups, forms, pro widgets |
 | Element Pack Pro | 9.1.0 | Additional Elementor widgets (BdThemes) — currently inactive |
